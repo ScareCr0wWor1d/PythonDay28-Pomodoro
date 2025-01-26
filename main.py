@@ -12,12 +12,13 @@ SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 Rep = 0
 check = 0
-
+timer = ''
 # ---------------------------- TIMER RESET ------------------------------- #
 
 
 def reset_timer():
     global Rep, check
+    my_window.after_cancel(timer)
     Rep = 0
     check = 0
     canvas_tom.itemconfig(canvas_lbl, text="25:00")
@@ -32,14 +33,14 @@ def start_timer():
     if Rep == 1 or Rep == 3 or Rep == 5 or Rep == 7:
         checked_lbl.config(text=check*'✓' + '⧖')
         my_window.attributes('-topmost', True)
-        check = check + 1
         status_lbl.config(text='Work', fg=GREEN)
-        count_down(WORK_MIN * 60)
+        count_down(WORK_MIN)
+        check += 1
         my_window.attributes('-topmost', False)
     elif Rep == 2 or Rep == 4 or Rep == 6:
         my_window.attributes('-topmost', True)
         checked_lbl.config(text=check * '✓')
-        count_down(SHORT_BREAK_MIN * 60)
+        count_down(SHORT_BREAK_MIN)
         status_lbl.config(text='Short Break', fg=PINK)
         my_window.attributes('-topmost', False)
     elif Rep == 8:
@@ -57,17 +58,17 @@ def start_timer():
 
 
 def count_down(count):
-    global check
     count_min = int(count/60)
     if count_min < 10:
         count_min = f"0{count_min}"
     count_sec = count % 60
     if count_sec < 10:
         count_sec = f"0{count_sec}"
-    if count > 0 and check > 0:
-        my_window.after(1000, count_down, count-1)
+    if count > 0:
+        global timer
+        timer = my_window.after(1000, count_down, count-1)
         canvas_tom.itemconfig(canvas_lbl, text=f"{count_min}:{count_sec}")
-    elif check > 0:
+    else:
         start_timer()
 
 # ---------------------------- UI SETUP ------------------------------- #
