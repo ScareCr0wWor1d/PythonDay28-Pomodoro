@@ -1,5 +1,4 @@
 import tkinter
-from PIL import ImageTk, Image
 
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
@@ -13,9 +12,9 @@ LONG_BREAK_MIN = 20
 Rep = 0
 check = 0
 timer = ''
-# ---------------------------- TIMER RESET ------------------------------- #
+# ----------------------------- TIMER RESET ------------------------------- #
 
-
+# Reset all default variable to 0.
 def reset_timer():
     global Rep, check
     my_window.after_cancel(timer)
