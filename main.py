@@ -14,7 +14,7 @@ check = 0
 timer = ''
 # ----------------------------- TIMER RESET ------------------------------- #
 
-
+# Reset all default variable to 0
 def reset_timer():
     global Rep, check
     my_window.after_cancel(timer)
