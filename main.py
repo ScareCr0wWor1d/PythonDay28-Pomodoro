@@ -1,5 +1,4 @@
 import tkinter
-from PIL import ImageTk, Image
 
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
